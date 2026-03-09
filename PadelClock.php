@@ -1,9 +1,34 @@
 <!DOCTYPE html>
 <?php
     function GamePoints($slot) {
-        echo "                <td class='gp_slot' id='gp$slot' onclick='incSlot($slot);'>\n";
-        echo "--";
+		if ( $slot==0 ) echo " <td class='gp_space'></td>\n";
+        echo "                <td 
+                     colspan=2
+                     class='gp_slot' 
+                     id='gp$slot' 
+                     onclick='cbClickSlotGP($slot);'
+                     ondblclick='cbDblClickSlotGP($slot);'
+                     style='-webkit-user-select:none;user-select:none;' 
+                     unselectable='on'
+                     onselectstart='return false;' 
+                     onmousedown='return false;'>\n";
+        echo "         --\n";
         echo "                </td>\n";
+		if ( $slot==1 ) echo " <td colspan=2 class='gp_space'></td>\n";
+    }
+    function SetGames($slot) {
+		if ( $slot==0 ) echo " <td colspan=2 class='sg_space'></td>\n";
+        echo "                <td 
+                     class='sg_slot' 
+                     id='sg$slot' 
+                     onclick='incSlotSG($slot);'
+                     style='-webkit-user-select:none;user-select:none;' 
+                     unselectable='on'
+                     onselectstart='return false;' 
+                     onmousedown='return false;'>\n";
+        echo "         --\n";
+        echo "                </td>\n";
+		if ( $slot==1 ) echo " <td colspan=2 class='sg_space'></td>\n";
     }
 ?>
 <html>
@@ -12,18 +37,40 @@
     </head>
     <style>
         table { width: 100%; }
-	.gp_slot { 
-            font-size: 500pt;
-            text-align: center;
-            font-family: arial;
-	    width: 50%;
-	    border: 1px solid #888;
-        }
+		.gp_slot { 
+			font-size: 400pt;
+			text-align: center;
+			font-family: arial;
+			width: 40%;
+			border: 1px solid #888;
+			padding: 0;
+		}
+		.sg_slot { 
+			font-size: 40pt;
+			text-align: center;
+			font-family: arial;
+			width: 10%;
+			border: 1px solid #888;
+		}
+		.gp_space {
+			width: 7%;
+			border: 1px solid #888;
+		}
+		.sp_space {
+			width: 7%;
+			border: 1px solid #888;
+		}
     </style>
     <body>
         <table>
+			<tr>
+	            <?php 
+                    SetGames(0);
+                    SetGames(1);
+                ?>
+			</tr>
             <tr>
-	        <?php 
+	            <?php 
                     GamePoints(0);
                     GamePoints(1);
                 ?>
@@ -32,38 +79,88 @@
     </body>
     <script>
         var gamePoints = new Array(2);
+        var setGames = new Array(2);
         const gamePointsStr = [0, 15, 30, 40, "V"];
         function resetGame() {
             gamePoints[0] = 0;
             gamePoints[1] = 0;
         }
+        function resetSet() {
+            setGames[0] = 0;
+            setGames[1] = 0;
+        }
         function showGamePointsSlot(slot, points=gamePoints[slot]) {
             let slotId = "gp" + slot;
-	    console.log("Looking for elemente " + slotId);
+			//console.log("Looking for element " + slotId);
             let ele = document.getElementById(slotId);
             if ( ! ele ) console.log("Element " + slotId + " not found.");
             ele.innerHTML = gamePointsStr[points];
+        }
+        function showSetGamesSlot(slot, games=setGames[slot]) {
+            let slotId = "sg" + slot;
+			//console.log("Looking for element " + slotId);
+            let ele = document.getElementById(slotId);
+            if ( ! ele ) console.log("Element " + slotId + " not found.");
+            ele.innerHTML = games;
         }
         function showGamePoints() {
             showGamePointsSlot(0);
             showGamePointsSlot(1);
         }
-        function incSlot(slot) {
+        function showSetGames() {
+            showSetGamesSlot(0);
+            showSetGamesSlot(1);
+        }
+        function incSlotGP(slot) {
             gamePoints[slot] += 1;
             //if ( gamePoints[slot]>4 ) resetGame();
             if ( gamePoints[slot]>=4 && Math.abs(gamePoints[0]-gamePoints[1])>1 ) {
                 resetGame();
-	        showGamePoints();
-                return;
-            }
-	    if ( gamePoints[0]==gamePoints[1] && gamePoints[0]>3 ) {
+				showGamePoints();
+				incSlotSG(slot);
+				return;
+			}
+			if ( gamePoints[0]==gamePoints[1] && gamePoints[0]>3 ) {
                 gamePoints[0] = 3;
                 gamePoints[1] = 3;
                 showGamePoints();
                 return;
             }
             showGamePointsSlot(slot);
+        } 
+        function incSlotSG(slot) {
+			console.log("incSlotSG(" + slot + ")");
+            setGames[slot] += 1;
+			console.log("incSlotSG(" + slot + ") = " + setGames[slot]);
+            //if ( gamePoints[slot]>4 ) resetGame();
+            if ( setGames[slot]>=6 && Math.abs(setGames[0]-setGames[1])>1 ) {
+                resetSet();
+				showSetGames();
+				return;
+			}
+            showSetGamesSlot(slot);
+			console.log("incSlotSG(" + slot + ") Done");
         }
+        var timerGP;
+        var firingGP = false;
+        function cbClickSlotGP(slot) {
+			// Detect the 2nd single click event, so we can stop it
+			if (firingGP) return;
+
+			firingGP = true;
+			timerGP = setTimeout(function() {
+			   if ( firingGP ) incSlotGP(slot); 
+			   firingGP = false;
+			}, 350);
+		}
+        function cbDblClickSlotGP(slot) {
+			firingGP = false;
+			console.log('cbDblClickSlotGP(' + slot + ')');
+			incSlotGP(1-slot);
+			return false;
+		}
+        resetSet();
+        showSetGames();
         resetGame();
         showGamePoints();
     </script>
