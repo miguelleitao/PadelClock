@@ -61,6 +61,7 @@
 			border: 1px solid #888;
 			font-size: 200pt;
 			text-align: center;
+			font-family: "Noto Sans", sans-serif;
 		}
 		.sp_space {
 			width: 7%;
