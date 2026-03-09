@@ -18,7 +18,7 @@ jobs:
           php-version: '8.2'
 
       - name: Build static pages
-        run: |
+        run: 
 	  mkdir build
           php PadelClock.php > build/PadelClock.html
 	  cp -p manifest.json build/
