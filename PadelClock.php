@@ -34,6 +34,10 @@
 <html>
     <head>
         <title>PadelClock</title>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="manifest" href="manifest.json">
     </head>
     <style>
         table { width: 100%; }
