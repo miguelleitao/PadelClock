@@ -2,6 +2,10 @@
 <html>
     <head>
         <title>PadelClock</title>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="manifest" href="manifest.json">
     </head>
     <style>
         table { width: 100%; }
@@ -23,6 +27,8 @@
 		.gp_space {
 			width: 7%;
 			border: 1px solid #888;
+			font-size: 200pt;
+			text-align: center;
 		}
 		.sp_space {
 			width: 7%;
@@ -56,7 +62,7 @@
  <td colspan=2 class='sg_space'></td>
 			</tr>
             <tr>
-	             <td class='gp_space'></td>
+	             <td class='gp_space'>&#11208;</td>
                 <td 
                      colspan=2
                      class='gp_slot' 
@@ -81,7 +87,7 @@
                      onmousedown='return false;'>
          --
                 </td>
- <td colspan=2 class='gp_space'></td>
+ <td colspan=2 class='gp_space'>&#11207;</td>
             </tr>
         </table>
     </body>

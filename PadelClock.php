@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
     function GamePoints($slot) {
-		if ( $slot==0 ) echo " <td class='gp_space'></td>\n";
+		if ( $slot==0 ) echo " <td class='gp_space'>&#11208;</td>\n";
         echo "                <td 
                      colspan=2
                      class='gp_slot' 
@@ -14,7 +14,7 @@
                      onmousedown='return false;'>\n";
         echo "         --\n";
         echo "                </td>\n";
-		if ( $slot==1 ) echo " <td colspan=2 class='gp_space'></td>\n";
+		if ( $slot==1 ) echo " <td colspan=2 class='gp_space'>&#11207;</td>\n";
     }
     function SetGames($slot) {
 		if ( $slot==0 ) echo " <td colspan=2 class='sg_space'></td>\n";
@@ -59,6 +59,8 @@
 		.gp_space {
 			width: 7%;
 			border: 1px solid #888;
+			font-size: 200pt;
+			text-align: center;
 		}
 		.sp_space {
 			width: 7%;
