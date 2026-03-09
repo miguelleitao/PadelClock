@@ -4,7 +4,11 @@
 		if ( $slot==0 ) echo " <td class='gp_space' style='-webkit-user-select:none;user-select:none;' 
                      unselectable='on'
                      onselectstart='return false;' 
-                     onmousedown='return false;'>&#11208;</td>\n";
+                     onmousedown='return false;'>
+                     <svg width='100' height='100'>
+					     <use href='#triangulo-direita'></use>
+					 </svg>
+					 </td>\n";
         echo "                <td 
                      colspan=2
                      class='gp_slot' 
@@ -75,6 +79,12 @@
 		}
     </style>
     <body>
+		<!-- definição do símbolo -->
+		<svg width="0" height="0" style="position:absolute">
+		  <symbol id="triangulo-direita" viewBox="0 0 100 100">
+			<polygon points="10,10 10,90 85,50" fill="black"/>
+		  </symbol>
+		</svg>
         <table>
 			<tr>
 	            <?php 
