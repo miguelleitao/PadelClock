@@ -21,6 +21,7 @@ jobs:
         run: |
 	  mkdir build
           php PadelClock.php > build/PadelClock.html
+	  cp -p manifest.json build/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
