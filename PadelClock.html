@@ -112,6 +112,10 @@
         var gamePoints = new Array(2);
         var setGames = new Array(2);
         var serveSide = 0;
+        const serveSideSymbol = [
+			"<svg width='100' height='100'> <use href='#triangulo-direita'></use> </svg>",
+			"<svg width='100' height='100'> <use href='#triangulo-esquerda'></use> </svg>",
+		];
         const gamePointsStr = [0, 15, 30, 40, "V"];
         function resetGame() {
             gamePoints[0] = 0;
@@ -121,6 +125,17 @@
             setGames[0] = 0;
             setGames[1] = 0;
         }
+        function showServeSideSlot(slot) {
+			let slotId = "ss" + slot;
+			let ele = document.getElementById(slotId);
+            if ( ! ele ) console.log("Element " + slotId + " not found.");
+            if ( serveSide == slot ) ele.innerHTML = serveSideSymbol[slot];
+            else                     ele.innerHtml = "";
+		}
+		function showServeSides() {
+			showServeSideSlot(0);
+			showServeSideSlot(1);
+		}
         function showGamePointsSlot(slot, points=gamePoints[slot]) {
             let slotId = "gp" + slot;
 			//console.log("Looking for element " + slotId);
@@ -145,6 +160,8 @@
         }
         function incSlotGP(slot) {
             gamePoints[slot] += 1;
+            serveSide = 1 - serveSide;
+            showServeSides();
             //if ( gamePoints[slot]>4 ) resetGame();
             if ( gamePoints[slot]>=4 && Math.abs(gamePoints[0]-gamePoints[1])>1 ) {
                 resetGame();
