@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <?php
     function GamePoints($slot) {
-		if ( $slot==0 ) echo " <td class='gp_space'>&#11208;</td>\n";
+		if ( $slot==0 ) echo " <td class='gp_space' style='-webkit-user-select:none;user-select:none;' 
+                     unselectable='on'
+                     onselectstart='return false;' 
+                     onmousedown='return false;'>&#11208;</td>\n";
         echo "                <td 
                      colspan=2
                      class='gp_slot' 
@@ -14,7 +17,10 @@
                      onmousedown='return false;'>\n";
         echo "         --\n";
         echo "                </td>\n";
-		if ( $slot==1 ) echo " <td colspan=2 class='gp_space'>&#11207;</td>\n";
+		if ( $slot==1 ) echo " <td colspan=2 class='gp_space' style='-webkit-user-select:none;user-select:none;' 
+                     unselectable='on'
+                     onselectstart='return false;' 
+                     onmousedown='return false;'>&#11207;</td>\n";
     }
     function SetGames($slot) {
 		if ( $slot==0 ) echo " <td colspan=2 class='sg_space'></td>\n";
