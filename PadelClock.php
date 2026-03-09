@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
     function GamePoints($slot) {
-		if ( $slot==0 ) echo " <td class='gp_space' style='-webkit-user-select:none;user-select:none;' 
+		if ( $slot==0 ) echo " <td id='ss0' class='gp_space' style='-webkit-user-select:none;user-select:none;' 
                      unselectable='on'
                      onselectstart='return false;' 
                      onmousedown='return false;'>
@@ -21,7 +21,7 @@
                      onmousedown='return false;'>\n";
         echo "         --\n";
         echo "                </td>\n";
-		if ( $slot==1 ) echo " <td colspan=2 class='gp_space' style='-webkit-user-select:none;user-select:none;' 
+		if ( $slot==1 ) echo " <td id='ss1' colspan=2 class='gp_space' style='-webkit-user-select:none;user-select:none;' 
                      unselectable='on'
                      onselectstart='return false;' 
                      onmousedown='return false;'>&#11207;</td>\n";
@@ -84,6 +84,9 @@
 		  <symbol id="triangulo-direita" viewBox="0 0 100 100">
 			<polygon points="10,10 10,90 85,50" fill="black"/>
 		  </symbol>
+		  <symbol id="triangulo-esquerda" viewBox="0 0 100 100">
+			<polygon points="90,10 90,90 15,50" fill="black"/>
+		  </symbol>
 		</svg>
         <table>
 			<tr>
@@ -120,9 +123,19 @@
         function showServeSideSlot(slot) {
 			let slotId = "ss" + slot;
 			let ele = document.getElementById(slotId);
-            if ( ! ele ) console.log("Element " + slotId + " not found.");
-            if ( serveSide == slot ) ele.innerHTML = serveSideSymbol[slot];
-            else                     ele.innerHtml = "";
+            if ( ! ele ) {
+				console.log("Element " + slotId + " not found.");
+				return;
+			}
+			console.log("slot: " + slot + " serveSide: " + serveSide);
+			console.log("symbol: " + serveSideSymbol[slot]);
+            if ( serveSide == slot ) {
+				console.log("serveSide == slot ");
+				ele.innerHTML = serveSideSymbol[slot];
+			}
+            else                     ele.innerHtml = "xxxxxxxxxxxx";
+            
+			console.log("result symbol: " + ele.innerHTML);
 		}
 		function showServeSides() {
 			showServeSideSlot(0);
