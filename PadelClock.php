@@ -103,6 +103,7 @@
     <script>
         var gamePoints = new Array(2);
         var setGames = new Array(2);
+        var serveSide = 0;
         const gamePointsStr = [0, 15, 30, 40, "V"];
         function resetGame() {
             gamePoints[0] = 0;
