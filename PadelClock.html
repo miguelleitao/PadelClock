@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<?php
-    function GamePoints($slot) {
-        echo "                <td class='gp_slot' id='gp$slot' onclick='incSlot($slot);'>\n";
-        echo "--";
-        echo "                </td>\n";
-    }
-?>
 <html>
     <head>
         <title>PadelClock</title>
@@ -23,10 +16,10 @@
     <body>
         <table>
             <tr>
-	        <?php 
-                    GamePoints(0);
-                    GamePoints(1);
-                ?>
+	                        <td class='gp_slot' id='gp0' onclick='incSlot(0);'>
+--                </td>
+                <td class='gp_slot' id='gp1' onclick='incSlot(1);'>
+--                </td>
             </tr>
         </table>
     </body>
