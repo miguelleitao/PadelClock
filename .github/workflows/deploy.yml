@@ -20,7 +20,7 @@ jobs:
       - name: Build static pages
         run: |
 	  mkdir build
-          php padelClock.php > build/padelClock.html
+          php PadelClock.php > build/PadelClock.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
