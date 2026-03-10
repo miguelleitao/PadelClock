@@ -68,6 +68,7 @@
 			font-size: 200pt;
 			text-align: center;
 			font-family: "Noto Sans", sans-serif;
+			padding-bottom: 110px;
 		}
 		.sp_space {
 			width: 7%;
