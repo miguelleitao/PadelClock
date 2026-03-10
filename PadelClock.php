@@ -104,6 +104,9 @@
         var gamePoints = new Array(2);
         var setGames = new Array(2);
         var serveSide = 0;
+        var nDeuce = 0;
+        var nBreakPoints = 0;
+        var nMatchPoints = 0;
         const serveSideSymbol = [
 			"<svg width='100' height='100'> <use href='#triangulo-direita'></use> </svg>",
 			"<svg width='100' height='100'> <use href='#triangulo-esquerda'></use> </svg>",
@@ -112,6 +115,8 @@
         function resetGame() {
             gamePoints[0] = 0;
             gamePoints[1] = 0;
+            nDeuce = 0;
+            nBreakPoints = 0;
         }
         function resetSet() {
             setGames[0] = 0;
@@ -161,17 +166,24 @@
             gamePoints[slot] += 1;
             //if ( gamePoints[slot]>4 ) resetGame();
             if ( gamePoints[slot]>=4 && Math.abs(gamePoints[0]-gamePoints[1])>1 ) {
+				// Game Win
                 resetGame();
 				showGamePoints();
 				incSlotSG(slot);
 				return;
 			}
 			if ( gamePoints[0]==gamePoints[1] && gamePoints[0]>3 ) {
+				// deuce: 40-40
                 gamePoints[0] = 3;
                 gamePoints[1] = 3;
+                nDeuce += 1;
                 showGamePoints();
                 return;
             }
+            if ( gamePoints[1-serveSide] >= 3 ) {
+				// BreakPoint
+				nBreakPoints += 1;
+			}
             showGamePointsSlot(slot);
         } 
         function incSlotSG(slot) {
