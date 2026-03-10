@@ -4,11 +4,7 @@
 		if ( $slot==0 ) echo " <td id='ss0' class='gp_space' style='-webkit-user-select:none;user-select:none;' 
                      unselectable='on'
                      onselectstart='return false;' 
-                     onmousedown='return false;'>
-                     <svg width='100' height='100'>
-					     <use href='#triangulo-direita'></use>
-					 </svg>
-					 </td>\n";
+                     onmousedown='return false;'> </td>\n";
         echo "                <td 
                      colspan=2
                      class='gp_slot' 
@@ -24,7 +20,7 @@
 		if ( $slot==1 ) echo " <td id='ss1' colspan=2 class='gp_space' style='-webkit-user-select:none;user-select:none;' 
                      unselectable='on'
                      onselectstart='return false;' 
-                     onmousedown='return false;'>&#11207;</td>\n";
+                     onmousedown='return false;'> </td>\n";
     }
     function SetGames($slot) {
 		if ( $slot==0 ) echo " <td colspan=2 class='sg_space'></td>\n";
@@ -127,15 +123,12 @@
 				console.log("Element " + slotId + " not found.");
 				return;
 			}
-			console.log("slot: " + slot + " serveSide: " + serveSide);
-			console.log("symbol: " + serveSideSymbol[slot]);
             if ( serveSide == slot ) {
-				console.log("serveSide == slot ");
 				ele.innerHTML = serveSideSymbol[slot];
 			}
-            else                     ele.innerHtml = "xxxxxxxxxxxx";
-            
-			console.log("result symbol: " + ele.innerHTML);
+            else {
+                ele.innerHTML = "";
+			}
 		}
 		function showServeSides() {
 			showServeSideSlot(0);
@@ -165,8 +158,6 @@
         }
         function incSlotGP(slot) {
             gamePoints[slot] += 1;
-            serveSide = 1 - serveSide;
-            showServeSides();
             //if ( gamePoints[slot]>4 ) resetGame();
             if ( gamePoints[slot]>=4 && Math.abs(gamePoints[0]-gamePoints[1])>1 ) {
                 resetGame();
@@ -185,6 +176,8 @@
         function incSlotSG(slot) {
 			console.log("incSlotSG(" + slot + ")");
             setGames[slot] += 1;
+            serveSide = 1 - serveSide;
+            showServeSides();
 			console.log("incSlotSG(" + slot + ") = " + setGames[slot]);
             //if ( gamePoints[slot]>4 ) resetGame();
             if ( setGames[slot]>=6 && Math.abs(setGames[0]-setGames[1])>1 ) {
@@ -213,6 +206,8 @@
 			incSlotGP(1-slot);
 			return false;
 		}
+		serveSide = 0;
+		showServeSides();
         resetSet();
         showSetGames();
         resetGame();
